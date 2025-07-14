@@ -1,52 +1,18 @@
-# 🚀 LAN DropSpot
-
 <div align="center">
 
-![LAN DropSpot Logo](https://img.shields.io/badge/LAN%20DropSpot-v1.0-blue?style=for-the-badge&logo=lightning&logoColor=white)
+<img src="https://github.com/user-attachments/assets/46663ce4-9edc-4035-b637-53ff41ac5f24" alt="LAN DropSpot Logo" width="800"/>
+
 
 **⚡ Lightning Fast • Zero Setup • LAN Powered**
-
-*Enterprise-grade local file sharing solution with zero configuration*
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=flat-square)](README.md)
 
-![LAN DropSpot](https://via.placeholder.com/800x400/1a1a2e/ffffff?text=LAN+DropSpot+v1.0)
-
 [🎯 Features](#-features) • [🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [🛠️ API Reference](#️-api-reference) • [🤝 Contributing](#-contributing)
 
 </div>
-
----
-
-## 🎯 Features
-
-<table>
-<tr>
-<td>
-
-### 🔥 Core Features
-- **🎯 Zero Configuration** - One-click deployment
-- **⚡ Real-time Sync** - WebSocket-powered updates
-- **🌐 Multi-device Support** - Works across all platforms
-- **📱 QR Code Generation** - Instant mobile access
-- **🔒 Security First** - Local-only, air-gapped operation
-
-</td>
-<td>
-
-### 🚀 Advanced Features
-- **📁 Bulk Operations** - Multi-file drag & drop
-- **⏰ Smart Cleanup** - Configurable auto-expiration
-- **🎨 Modern UI/UX** - Responsive design with animations
-- **📊 Real-time Monitoring** - Connection status & file tracking
-- **🔄 Auto-recovery** - WebSocket reconnection logic
-
-</td>
-</tr>
-</table>
 
 ---
 
@@ -95,22 +61,6 @@ docker-compose up -d
 ```
 
 </details>
-
-### ⚡ First-Time Setup (< 30 seconds)
-
-1. **Launch Application**
-   ```bash
-   ./run.sh  # or run.bat on Windows
-   ```
-
-2. **Access Web Interface**
-   - Browser auto-opens to `http://localhost:8000`
-   - Share the network URL with other devices
-
-3. **Start Sharing**
-   - Drag files to upload zone
-   - Generate QR codes for mobile access
-   - Copy links or download directly
 
 ---
 
@@ -341,32 +291,6 @@ curl http://localhost:8000/metrics
 # Logs
 docker logs lan-dropspot --follow
 ```
-
----
-
-## 🔒 Security
-
-### 🛡️ Security Features
-
-- **🔐 Local-only Operation** - No internet access required
-- **🚫 Zero Data Persistence** - Files auto-expire
-- **🔒 Input Validation** - Prevents malicious uploads
-- **🛡️ CORS Protection** - Configurable origin restrictions
-- **⚡ Rate Limiting** - Prevents abuse
-
-### 🔍 Security Audit
-
-```bash
-# Scan dependencies for vulnerabilities
-pip-audit
-
-# Static code analysis
-bandit -r backend/
-
-# Container security scan
-docker scout cves lan-dropspot:latest
-```
-
 ---
 
 ## 🤝 Contributing
@@ -442,15 +366,6 @@ copies or substantial portions of the Software.
 
 ---
 
-## 🙏 Acknowledgments
-
-- **FastAPI** - For the amazing async web framework
-- **Tailwind CSS** - For rapid UI development
-- **QR Code Library** - For seamless mobile integration
-- **Community Contributors** - For continuous improvements
-
----
-
 ## � Support
 
 <div align="center">
@@ -459,8 +374,8 @@ copies or substantial portions of the Software.
 
 ⭐ **Star this repository** if you found it helpful!
 
-[![GitHub stars](https://img.shields.io/github/stars/yadavnikhil03/lan-dropspot?style=social)](https://github.com/yadavnikhil03/lan-dropspot/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yadavnikhil03/lan-dropspot?style=social)](https://github.com/yadavnikhil03/lan-dropspot/network)
+[![GitHub stars](https://img.shields.io/github/stars/yadavnikhil03/LAN-DropSpot?style=social)](https://github.com/yadavnikhil03/LAN-DropSpot)
+[![GitHub forks](https://img.shields.io/github/forks/yadavnikhil03/LAN-DropSpot?style=social)](https://github.com/yadavnikhil03/LAN-DropSpot)
 
 </div>
 
@@ -469,8 +384,6 @@ copies or substantial portions of the Software.
 <div align="center">
 
 **🚀 Made with ❤️ by [Nikhil Yadav](https://github.com/yadavnikhil03)**
-
-*Transforming local file sharing, one network at a time.*
 
 ![Footer](https://img.shields.io/badge/LAN%20DropSpot-Changing%20the%20game-success?style=for-the-badge)
 
