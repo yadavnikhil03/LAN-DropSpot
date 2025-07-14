@@ -1,12 +1,9 @@
-# 🚀 LAN DropSpot
-
 <div align="center">
 
-![LAN DropSpot Logo](https://img.shields.io/badge/LAN%20DropSpot-v1.0-blue?style=for-the-badge&logo=lightning&logoColor=white)
+<img src="https://github.com/user-attachments/assets/46663ce4-9edc-4035-b637-53ff41ac5f24" alt="LAN DropSpot Logo" width="800"/>
+
 
 **⚡ Lightning Fast • Zero Setup • LAN Powered**
-
-*Enterprise-grade local file sharing solution with zero configuration*
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
@@ -379,8 +376,8 @@ copies or substantial portions of the Software.
 
 ⭐ **Star this repository** if you found it helpful!
 
-[![GitHub stars](https://img.shields.io/github/stars/yadavnikhil03/lan-dropspot?style=social)](https://github.com/yadavnikhil03/lan-dropspot)
-[![GitHub forks](https://img.shields.io/github/forks/yadavnikhil03/lan-dropspot?style=social)](https://github.com/yadavnikhil03/lan-dropspot)
+[![GitHub stars](https://img.shields.io/github/stars/yadavnikhil03/LAN-DropSpot?style=social)](https://github.com/yadavnikhil03/LAN-DropSpot)
+[![GitHub forks](https://img.shields.io/github/forks/yadavnikhil03/LAN-DropSpot?style=social)](https://github.com/yadavnikhil03/LAN-DropSpot)
 
 </div>
 
