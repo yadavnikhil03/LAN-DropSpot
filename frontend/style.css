@@ -1,0 +1,488 @@
+/* Cyberpunk Enhanced Styling */
+
+/* Custom animations */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Cyberpunk text effects */
+.cyber-text-glow {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.cyber-glow-box {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.cyber-glow-subtle {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cyber-glow-bar {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced buttons */
+.cyber-btn-primary {
+  @apply bg-black text-white font-orbitron font-bold px-8 py-4 rounded-xl transition-all duration-300 hover:bg-gray-800 active:scale-95;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cyber-btn-primary:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.cyber-btn-secondary {
+  @apply bg-gray-200 text-black font-orbitron font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:bg-gray-300 active:scale-95;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cyber-btn-secondary:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.cyber-btn-danger {
+  @apply bg-red-500 text-white font-orbitron font-semibold px-4 py-3 rounded-lg transition-all duration-300 hover:bg-red-600 active:scale-95;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.cyber-btn-danger:hover {
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Enhanced drop zone */
+.cyber-drop-zone {
+  position: relative;
+  border-width: 3px;
+}
+
+.cyber-drop-zone.drag-over {
+  @apply border-black bg-gray-100 scale-105;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.cyber-drop-zone.drag-over #drop-glow {
+  opacity: 1;
+}
+
+.cyber-drop-zone.drag-over #upload-icon {
+  @apply text-black scale-110;
+}
+
+/* Enhanced file cards */
+.cyber-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
+  transition: left 0.5s;
+}
+
+.cyber-card:hover::before {
+  left: 100%;
+}
+
+/* QR code styling */
+.qr-code {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Connection status indicator */
+.ws-connected {
+  @apply bg-green-500;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.ws-disconnected {
+  @apply bg-red-500;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.ws-connecting {
+  @apply bg-yellow-500;
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+  animation: pulse 1s infinite;
+}
+
+/* Toast enhancements */
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast.hide {
+  transform: translateX(100%);
+}
+
+/* Progress bar enhancements */
+.upload-progress-bar {
+  background: linear-gradient(90deg, #000, #333, #000);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ================================
+   DEVELOPER CREDIT STYLES
+   ================================ */
+
+/* Option 1: Floating Corner Badge (Recommended) */
+.dev-credit-floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 40;
+  animation: float 3s ease-in-out infinite;
+}
+
+.dev-credit-link {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.8;
+}
+
+.dev-credit-link:hover {
+  opacity: 1;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 1);
+}
+
+.dev-credit-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dev-credit-text {
+  color: #e5e5e5;
+}
+
+.dev-credit-heart {
+  color: #ff6b6b;
+  animation: pulse 2s infinite;
+  font-size: 16px;
+}
+
+.dev-credit-name {
+  color: #00d4ff;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.dev-credit-github-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.dev-credit-link:hover .dev-credit-github-icon {
+  opacity: 1;
+}
+
+/* Option 2: Minimalist Chip */
+.dev-credit-chip {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 40;
+}
+
+.dev-chip-link {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: "Orbitron", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  opacity: 0.7;
+}
+
+.dev-chip-link:hover {
+  opacity: 1;
+  border-color: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dev-chip-icon {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.dev-chip-text {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Option 3: Neon Glow Tag */
+.dev-credit-neon {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 40;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.dev-neon-link {
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+  font-family: "Orbitron", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #000;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  backdrop-filter: blur(5px);
+}
+
+.dev-neon-link:hover {
+  opacity: 1;
+  animation: neon-pulse 1.5s infinite;
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 1);
+}
+
+.dev-neon-bracket {
+  color: #666;
+  font-size: 16px;
+}
+
+.dev-neon-text {
+  color: #000;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile responsiveness for developer credits */
+@media (max-width: 768px) {
+  .dev-credit-floating {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .dev-credit-link {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+
+  .dev-credit-content {
+    gap: 4px;
+  }
+
+  .dev-credit-github-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+  }
+
+  .dev-credit-chip {
+    bottom: 15px;
+    left: 15px;
+  }
+
+  .dev-chip-link {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .dev-credit-neon {
+    right: 10px;
+    top: 40%;
+  }
+
+  .dev-neon-link {
+    font-size: 12px;
+    padding: 10px 6px;
+  }
+}
+
+/* Hide alternative options by default */
+.dev-credit-chip.hidden,
+.dev-credit-neon.hidden {
+  display: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .cyber-drop-zone {
+    @apply p-8;
+  }
+
+  .file-card {
+    @apply p-4;
+  }
+
+  .file-card .flex {
+    @apply flex-col space-x-0 space-y-4;
+  }
+
+  .qr-toggle-btn {
+    @apply self-start;
+  }
+
+  .cyber-btn-primary {
+    @apply px-6 py-3 text-sm;
+  }
+
+  .cyber-btn-secondary {
+    @apply px-4 py-2 text-sm;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

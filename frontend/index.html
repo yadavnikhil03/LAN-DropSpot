@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAN DropSpot ⚡ Enhanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'orbitron': ['Orbitron', 'monospace'],
+                        'tech': ['Share Tech Mono', 'monospace'],
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'pulse-glow': 'pulse-glow 1.5s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.5s ease-out',
+                        'fade-in': 'fade-in 0.3s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white min-h-screen font-tech text-black">
+    <!-- Header -->
+    <header class="border-b border-gray-200 bg-white/95 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-black rounded-2xl flex items-center justify-center cyber-glow-box">
+                        <span class="text-white text-2xl font-bold animate-pulse-glow">⚡</span>
+                    </div>
+                    <div>
+                        <h1 class="text-4xl font-orbitron font-black text-black cyber-text-glow">
+                            LAN DropSpot
+                        </h1>
+                        <div class="text-gray-600 font-tech text-sm tracking-wide min-h-[20px]">
+                            <span id="typewriter-text"></span>
+                            <span id="typewriter-cursor" class="animate-pulse">|</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="flex items-center space-x-4">
+                        <div id="connection-status" class="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-3 py-2 rounded-full border border-gray-200 shadow-lg">
+                            <div id="ws-indicator" class="relative w-3 h-3 bg-gray-400 rounded-full transition-all duration-300">
+                                <!-- Glow ring for connected state -->
+                                <div class="absolute inset-0 rounded-full opacity-0 transition-opacity duration-300" id="ws-glow"></div>
+                            </div>
+                            <span id="connection-text" class="text-xs font-tech text-gray-500 font-medium transition-all duration-300">Connecting...</span>
+                        </div>
+                        <div id="server-status" class="text-sm font-tech">
+                            <div class="text-gray-500">Network Access</div>
+                            <div id="server-ip" class="text-black font-bold">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Main Loading Overlay -->
+        <div id="main-loading" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center">
+            <div class="bg-white rounded-2xl p-8 shadow-2xl border border-gray-200 max-w-sm mx-4 animate-pulse">
+                <div class="text-center">
+                    <div class="animate-spin w-12 h-12 border-4 border-black border-t-transparent rounded-full mx-auto mb-4"></div>
+                    <h3 class="text-xl font-orbitron font-bold text-black mb-2">⚡ Loading</h3>
+                    <p class="text-gray-600 text-sm font-tech" id="main-loading-message">Please wait...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fallback Loading Spinner (if typewriter fails) -->
+        <div id="fallback-loading" class="hidden fixed top-4 right-4 z-50">
+            <div class="bg-black text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2">
+                <div class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+                <span class="text-sm font-medium" id="fallback-message">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Upload Zone -->
+        <section class="mb-12">
+            <div class="relative">
+                <div class="bg-white border-3 border-dashed border-gray-300 rounded-3xl p-16 text-center transition-all duration-500 hover:border-black hover:bg-gray-50 cyber-drop-zone" 
+                     id="drop-zone">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-3xl opacity-0 transition-opacity duration-500" id="drop-glow"></div>
+                    <div class="relative z-10">
+                        <div class="mb-8">
+                            <svg class="mx-auto h-20 w-20 text-gray-400 transition-all duration-300" id="upload-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                        </div>
+                        <h2 class="text-3xl font-orbitron font-bold text-black mb-3 cyber-text-glow">
+                            Drop files here to share
+                        </h2>
+                        <p class="text-gray-600 font-tech mb-8 text-lg">
+                            or click to browse your computer
+                        </p>
+                        <button id="browse-btn" class="cyber-btn-primary">
+                            <span class="flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                <span>Choose Files</span>
+                            </span>
+                        </button>
+                        <input type="file" id="file-input" multiple class="hidden">
+                    </div>
+                </div>
+
+                <!-- Upload Progress -->
+                <div id="upload-progress" class="hidden mt-8 animate-slide-up">
+                    <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-orbitron font-bold text-lg">Uploading Files</h3>
+                            <div id="upload-count" class="text-sm font-tech text-gray-600"></div>
+                        </div>
+                        <div class="space-y-4" id="upload-items"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Active Files -->
+        <section>
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-orbitron font-bold text-black cyber-text-glow">
+                        Active Files
+                    </h2>
+                    <p class="text-gray-600 font-tech mt-1">
+                        <span id="file-count">0</span> files • Auto-delete in <span id="expiry-time">30</span> minutes
+                    </p>
+                </div>
+                <div class="flex space-x-3">
+                    <button id="refresh-btn" class="cyber-btn-secondary">
+                        <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        Refresh
+                    </button>
+                    <button id="clear-all-btn" class="cyber-btn-danger hidden">
+                        <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        Clear All
+                    </button>
+                </div>
+            </div>
+            
+            <div id="files-container">
+                <div id="files-grid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+                <div id="empty-state" class="text-center py-16 animate-fade-in">
+                    <div class="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 cyber-glow-subtle">
+                        <svg class="w-16 h-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold text-gray-900 mb-3">No files shared yet</h3>
+                    <p class="text-gray-600 font-tech text-lg">Upload some files to get started!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Enhanced Developer Credit - More Visible -->
+    <div class="fixed bottom-6 right-6 z-50 animate-float">
+        <div class="group relative">
+            <!-- Glowing background effect -->
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+            
+            <!-- Main credit button -->
+            <a href="https://github.com/yadavnikhil03" target="_blank" rel="noopener noreferrer" 
+               class="relative flex items-center space-x-3 bg-white text-black px-6 py-3 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:border-blue-500 group">
+                
+                <!-- Developer icon -->
+                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center animate-spin-slow">
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </div>
+                
+                <!-- Text content -->
+                <div class="flex flex-col">
+                    <span class="text-xs text-gray-500 font-medium">Made by</span>
+                    <span class="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-300">
+                        @yadavnikhil03
+                    </span>
+                </div>
+                
+                <!-- Heart icon -->
+                <div class="text-red-500 animate-pulse">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+            </a>
+            
+            <!-- Hover tooltip -->
+            <div class="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div class="bg-black text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                    ⭐ Star this project on GitHub!
+                    <div class="absolute top-full right-4 border-4 border-transparent border-t-black"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Card Template -->
+    <template id="file-card-template">
+        <div class="file-card bg-white border-2 border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:border-black hover:-translate-y-2 animate-slide-up cyber-card">
+            <div class="flex items-start justify-between mb-6">
+                <div class="flex-1 min-w-0">
+                    <h3 class="file-name font-orbitron font-bold text-xl text-black truncate mb-2 cyber-text-glow"></h3>
+                    <div class="space-y-1">
+                        <p class="file-size font-tech text-sm text-gray-600"></p>
+                        <p class="file-expiry font-tech text-sm text-orange-600 font-semibold"></p>
+                        <p class="file-uploaded font-tech text-xs text-gray-500"></p>
+                    </div>
+                </div>
+                <button class="qr-toggle-btn ml-4 p-2 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors duration-200">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- QR Code Section (Initially Hidden) -->
+            <div class="qr-section hidden mb-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                <div class="flex items-center justify-center">
+                    <img class="qr-code w-32 h-32 border-2 border-gray-300 rounded-lg cyber-glow-subtle" alt="QR Code">
+                </div>
+                <p class="text-center text-xs font-tech text-gray-600 mt-2">Scan with mobile device</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="flex gap-3">
+                    <button class="copy-btn cyber-btn-secondary flex-1">
+                        <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Copy Link
+                    </button>
+                    <button class="download-btn cyber-btn-primary flex-1">
+                        <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Download
+                    </button>
+                    <button class="delete-btn cyber-btn-danger">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+                <input type="text" class="download-url w-full px-4 py-3 text-sm font-tech bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent" readonly>
+            </div>
+        </div>
+    </template>
+
+    <!-- Upload Progress Item Template -->
+    <template id="upload-progress-template">
+        <div class="upload-item">
+            <div class="flex items-center justify-between mb-2">
+                <span class="upload-filename font-tech text-sm font-semibold"></span>
+                <span class="upload-percentage font-tech text-sm text-gray-600"></span>
+            </div>
+            <div class="bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div class="upload-progress-bar bg-black h-full transition-all duration-300 cyber-glow-bar" style="width: 0%"></div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Toast Notification Template -->
+    <template id="toast-template">
+        <div class="toast fixed top-4 right-4 bg-black text-white px-6 py-4 rounded-xl shadow-2xl z-50 transform translate-x-full transition-all duration-300 cyber-glow-box">
+            <div class="flex items-center space-x-3">
+                <span class="toast-icon text-xl"></span>
+                <div>
+                    <div class="toast-message font-tech font-semibold"></div>
+                    <div class="toast-submessage font-tech text-sm opacity-75"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
