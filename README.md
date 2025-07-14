@@ -10,8 +10,6 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=flat-square)](README.md)
 
-![LAN DropSpot](https://via.placeholder.com/800x400/1a1a2e/ffffff?text=LAN+DropSpot+v1.0)
-
 [🎯 Features](#-features) • [🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [🛠️ API Reference](#️-api-reference) • [🤝 Contributing](#-contributing)
 
 </div>
